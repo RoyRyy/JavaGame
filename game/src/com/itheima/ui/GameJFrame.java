@@ -10,7 +10,7 @@ public class GameJFrame extends JFrame {
         //设置界面的宽高
         this.setSize(603,680);
         //设置界面的标题
-        this.setTitle("拼图单机版 v1.0");
+        this.setTitle("坤坤爱拼图 v1.0");
         //设置界面置顶
         this.setAlwaysOnTop(true);
         //设置界面居中
