@@ -13,8 +13,20 @@ public class GameJFrame extends JFrame {
         //初始化菜单
         initJMenuBar();
 
+        //初始化图片
+        initImage();
+
         //让界面显示出来，建议写在最后
         this.setVisible(true);
+    }
+    //初始化图片
+    private void initImage() {
+        //创建一个图片ImageIcon的对象
+        ImageIcon icon = new ImageIcon("C:\\Users\\raoyi\\Desktop\\java code\\JavaGame\\image\\animal\\animal1\\3.png");
+        //创建一个JLabel的对象(管理容器)
+        JLabel jLabel = new JLabel(icon);
+        //把管理容器添加到界面中
+        this.add(jLabel);
     }
 
     private void initJMenuBar() {
