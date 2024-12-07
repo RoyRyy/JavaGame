@@ -22,11 +22,13 @@ public class GameJFrame extends JFrame {
     //初始化图片
     private void initImage() {
         //创建一个图片ImageIcon的对象
-        ImageIcon icon = new ImageIcon("C:\\Users\\raoyi\\Desktop\\java code\\JavaGame\\image\\animal\\animal1\\3.png");
+        ImageIcon icon = new ImageIcon("C:\\Users\\raoyi\\Desktop\\java code\\JavaGame\\image\\animal\\animal1\\1.png");
         //创建一个JLabel的对象(管理容器)
         JLabel jLabel = new JLabel(icon);
+        //指定图片位置
+        jLabel.setBounds(0, 0, 105, 105);
         //把管理容器添加到界面中
-        this.add(jLabel);
+        this.getContentPane().add(jLabel);
     }
 
     private void initJMenuBar() {
@@ -70,6 +72,9 @@ public class GameJFrame extends JFrame {
         this.setLocationRelativeTo(null);
         //设置关闭模式
         this.setDefaultCloseOperation(3);
+
+        //取消默认的居中放置，只有取消了才会按照XY轴的形式添加组件
+        this.setLayout(null);
     }
 
 }
