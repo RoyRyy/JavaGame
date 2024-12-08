@@ -1,6 +1,7 @@
 package com.itheima.ui;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Exercise3 {
@@ -28,7 +29,14 @@ public class Exercise3 {
         //jtb:组件对象，表示你要给哪个组件添加事件
         //addActionListener:表示我要给组件添加哪个事件监听（动作监听包含鼠标左键点击，空格）
         //参数：表示事件被触发之后要执行的代码
-        jtb.addActionListener(new MyActionListener());
+        //jtb.addActionListener(new MyActionListener());
+        jtb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("呆逼，点我干嘛？");
+            }
+        });
+
         //把按钮添加到界面当中
         jFrame.getContentPane().add(jtb);
 
