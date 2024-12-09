@@ -20,6 +20,7 @@ public class MyJFrame3 extends JFrame implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         System.out.println("松开按键");
+        e.getKeyCode();
     }
 
     public MyJFrame3(){
