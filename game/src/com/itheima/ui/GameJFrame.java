@@ -17,6 +17,14 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
     //定义一个变量，记录当前展示图片的路径
     String path="image\\animal\\animal1\\";
 
+    //定义一个二维数组，存储正确的数据
+    int[][] win={
+            {1,2,3,4},
+            {5,6,7,8},
+            {9,10,11,12},
+            {13,14,15,0}
+    };
+
     public GameJFrame() {
         // 初始化界面
         initJFrame();
@@ -62,6 +70,12 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
 
     private void initImage() {
         this.getContentPane().removeAll();
+        if (victory()) {
+            //显示胜利的图标
+            JLabel winJLabel = new JLabel(new ImageIcon("C:\\Users\\raoyi\\Desktop\\java code\\JavaGame\\image\\win.png"));
+            winJLabel.setBounds(203,283,197,73);
+            this.getContentPane().add(winJLabel);
+        }
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int num = data[i][j];
@@ -136,6 +150,13 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
     //松开按键时调用
     @Override
     public void keyReleased(KeyEvent e) {
+        //判断游戏是否胜利，如果胜利，此方法需要直接结束，不能再执行下面的移动代码了
+        if(victory()){
+            //1.返回结果
+            //2.结束方法
+            return;
+        }
+
         int code = e.getKeyCode();
         if (code == 37 && y < 3) { // 左
             data[x][y] = data[x][y + 1];
@@ -207,5 +228,23 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {}
+
+    //判断data数组中的数据是否和win数组中的相同
+    //如果全部相同，返回true,否则返回false
+    public boolean victory(){
+        for (int i = 0; i < data.length; i++) {
+            //i:依次表示二维数组data里面的索引
+            //data[i]:依次表示每一个一维数组
+            for (int j = 0; j < data[i].length; j++) {
+                if (data[i][j] !=win[i][j]) {
+                    //只要有一个数据不一样，则返回false
+                    return false;
+                }
+
+            }
+        }
+        //循环结束数组遍历比较完毕
+        return true;
+    }
 }
 
