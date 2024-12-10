@@ -14,6 +14,9 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
     int x = 0; // 空白块的行
     int y = 0; // 空白块的列
 
+    //定义一个变量，记录当前展示图片的路径
+    String path="image\\animal\\animal1\\";
+
     public GameJFrame() {
         // 初始化界面
         initJFrame();
@@ -62,7 +65,7 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int num = data[i][j];
-                JLabel jLabel = new JLabel(new ImageIcon("image\\animal\\animal1\\" + num + ".jpg"));
+                JLabel jLabel = new JLabel(new ImageIcon(path + num + ".jpg"));
                 jLabel.setBounds(105 * j + 83, 105 * i + 134, 105, 105);
                 jLabel.setBorder(new BevelBorder(1));
                 this.getContentPane().add(jLabel);
@@ -111,8 +114,25 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
     @Override
     public void keyTyped(KeyEvent e) {}
 
+    //按下不松时会调用这个方法
     @Override
-    public void keyPressed(KeyEvent e) {}
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+        if(code==65){
+            //把界面中所有的图片全部删除
+            this.getContentPane().removeAll();
+            //加载第一张完整的图片
+            JLabel all = new JLabel(new ImageIcon(path+"all.jpg"));
+            all.setBounds(83,134,420,420);
+            this.getContentPane().add(all);
+            //加载背景图片
+            ImageIcon icon = new ImageIcon("image\\background.png");
+            JLabel background = new JLabel(icon);
+            background.setBounds(40, 40, 508, 560);
+            this.getContentPane().add(background);
+            this.getContentPane().repaint();
+        }
+    }
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -136,6 +156,8 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
             data[x][y] = data[x - 1][y];
             data[x - 1][y] = 0;
             x--;
+            initImage();
+        }else if (code == 65) {
             initImage();
         }
     }
