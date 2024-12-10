@@ -133,7 +133,7 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
             this.getContentPane().repaint();
         }
     }
-
+    //松开按键时调用
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
@@ -158,6 +158,16 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
             x--;
             initImage();
         }else if (code == 65) {
+            initImage();
+        }else if(code==87){
+            data=new int[][]{
+                    {1,2,3,4},
+                    {5,6,7,8},
+                    {9,10,11,12},
+                    {13,14,15,0}
+            };
+            x=3;
+            y=3;
             initImage();
         }
     }
