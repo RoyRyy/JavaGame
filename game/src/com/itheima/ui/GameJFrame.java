@@ -25,6 +25,9 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
             {13,14,15,0}
     };
 
+    //定义变量用来统计步数
+    int step=0;
+
     public GameJFrame() {
         // 初始化界面
         initJFrame();
@@ -76,6 +79,11 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
             winJLabel.setBounds(203,283,197,73);
             this.getContentPane().add(winJLabel);
         }
+
+        JLabel stepCount=new JLabel("步数："+step);
+        stepCount.setBounds(50,30,100,20);
+        this.getContentPane().add(stepCount);
+
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int num = data[i][j];
@@ -162,21 +170,26 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
             data[x][y] = data[x][y + 1];
             data[x][y + 1] = 0;
             y++;
+            step++;
+            //每移动一次，计数器就自增一次
             initImage();
         } else if (code == 38 && x < 3) { // 上
             data[x][y] = data[x + 1][y];
             data[x + 1][y] = 0;
             x++;
+            step++;
             initImage();
         } else if (code == 39 && y > 0) { // 右
             data[x][y] = data[x][y - 1];
             data[x][y - 1] = 0;
             y--;
+            step++;
             initImage();
         } else if (code == 40 && x > 0) { // 下
             data[x][y] = data[x - 1][y];
             data[x - 1][y] = 0;
             x--;
+            step++;
             initImage();
         }else if (code == 65) {
             initImage();
