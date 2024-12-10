@@ -1,6 +1,7 @@
 package com.itheima.ui;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.util.Random;
 
 public class GameJFrame extends JFrame {
@@ -53,21 +54,35 @@ public class GameJFrame extends JFrame {
     //初始化图片
     //添加图片时，需要按照二维数组中管理的数据添加图片
     private void initImage() {
+        //细节：
+        //先加载的图片在上方，后加载的图片塞在下面。
+        //路径分为两种：
+        //绝对路径：一定是从盘符开始
+        //相对路径：相对当前项目而言的
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 //获取当前要加载图片的序号
                 int num =data[i][j];
-                JLabel jLabel = new JLabel(new ImageIcon("C:\\Users\\raoyi\\Desktop\\java code\\JavaGame\\image\\animal\\animal1\\"+num+".jpg"));
+                JLabel jLabel = new JLabel(new ImageIcon("image\\animal\\animal1\\"+num+".jpg"));
                 //指定图片位置
-                jLabel.setBounds(105*j, 105*i, 105, 105);
+                jLabel.setBounds(105*j+83, 105*i+134, 105, 105);
+                //给图片添加边框
+                //0:表示让图片凸起来
+                //1:凹下去
+                jLabel.setBorder(new BevelBorder(1));
                 //把管理容器添加到界面中
                 this.getContentPane().add(jLabel);
                 //添加一次之后，number需要自增
 
             }
         }
-
+        //添加背景图片
+        ImageIcon icon=new ImageIcon("image\\background.png");
+        JLabel background=new JLabel(icon);
+        background.setBounds(40,40,508,560);
+        //把背景图片添加到界面当中
+        this.getContentPane().add(background);
     }
 
     private void initJMenuBar() {
