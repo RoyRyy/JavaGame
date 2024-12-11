@@ -3,13 +3,10 @@ package com.itheima.ui;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.Random;
 
-public class GameJFrame extends JFrame implements KeyListener, MouseListener {
+public class GameJFrame extends JFrame implements KeyListener, MouseListener, ActionListener {
     int[][] data = new int[4][4];
     int x = 0; // 空白块的行
     int y = 0; // 空白块的列
@@ -27,6 +24,11 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
 
     //定义变量用来统计步数
     int step=0;
+
+    JMenuItem replayItem = new JMenuItem("重新游戏");
+    JMenuItem reLoginItem = new JMenuItem("重新登录");
+    JMenuItem closeItem = new JMenuItem("关闭游戏");
+    JMenuItem accountItem = new JMenuItem("坤众号");
 
     public GameJFrame() {
         // 初始化界面
@@ -107,15 +109,18 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
         JMenu functionJMenu = new JMenu("功能");
         JMenu aboutJMenu = new JMenu("关于我们");
 
-        JMenuItem replayItem = new JMenuItem("重新游戏");
-        JMenuItem reLoginItem = new JMenuItem("重新登录");
-        JMenuItem closeItem = new JMenuItem("关闭游戏");
-        JMenuItem accountItem = new JMenuItem("公众号");
+
 
         functionJMenu.add(replayItem);
         functionJMenu.add(reLoginItem);
         functionJMenu.add(closeItem);
         aboutJMenu.add(accountItem);
+
+        //给条目绑定事件
+        replayItem.addActionListener(this);
+        reLoginItem.addActionListener(this);
+        closeItem.addActionListener(this);
+        accountItem.addActionListener(this);
 
         menuBar.add(functionJMenu);
         menuBar.add(aboutJMenu);
@@ -258,6 +263,56 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener {
         }
         //循环结束数组遍历比较完毕
         return true;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //获取当前被点击的条目对象
+        Object obj = e.getSource();
+        //判断
+        if(obj == replayItem){
+            System.out.println("重新游戏");
+
+            //计数器清零
+            step=0;
+            //再次打乱二维数组中的数据
+            initData();
+            //重新加载图片
+            initImage();
+
+        }else if(obj == reLoginItem){
+            System.out.println("重新登录");
+            //关闭当前的游戏界面
+            this.setVisible(false);
+            //打开登录界面
+            new LoginJFrame();
+        }else if(obj == closeItem){
+            System.out.println("关闭游戏");
+            //直接关闭虚拟机即可
+            System.exit(0);
+
+        }else if(obj == accountItem){
+            System.out.println("坤众号");
+
+            //创建一个弹框对象
+            JDialog jDialog = new JDialog();
+            //创建一个管理图片的容器对象JLabel
+            JLabel jLabel = new JLabel(new ImageIcon("image\\about.jpg"));
+            //设置位置和宽高
+            jLabel.setBounds(0,0,259,256);
+            //把图片添加到弹框当中
+            jDialog.getContentPane().add(jLabel);
+            //给弹框设置大小
+            jDialog.setSize(259,256);
+            //让弹框置顶
+            jDialog.setAlwaysOnTop(true);
+            //让弹框居中
+            jDialog.setLocationRelativeTo(null);
+            //弹框不关闭则无法操作下面的界面
+            jDialog.setModal(true);
+            //让弹框显示出来
+            jDialog.setVisible(true);
+        }
     }
 }
 
