@@ -30,6 +30,10 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener, Ac
     JMenuItem closeItem = new JMenuItem("关闭游戏");
     JMenuItem accountItem = new JMenuItem("坤众号");
 
+    JMenuItem girlItem=new JMenuItem("美女");
+    JMenuItem animalItem = new JMenuItem("动物");
+    JMenuItem sportItem = new JMenuItem("运动");
+
     public GameJFrame() {
         // 初始化界面
         initJFrame();
@@ -106,21 +110,33 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener, Ac
 
     private void initJMenuBar() {
         JMenuBar menuBar = new JMenuBar();
+        JMenu changeImage =new JMenu("更换图片");
         JMenu functionJMenu = new JMenu("功能");
         JMenu aboutJMenu = new JMenu("关于我们");
-
 
 
         functionJMenu.add(replayItem);
         functionJMenu.add(reLoginItem);
         functionJMenu.add(closeItem);
+        functionJMenu.add(changeImage);
         aboutJMenu.add(accountItem);
+
+        changeImage.add(girlItem);
+        changeImage.add(animalItem);
+        changeImage.add(sportItem);
+
 
         //给条目绑定事件
         replayItem.addActionListener(this);
         reLoginItem.addActionListener(this);
         closeItem.addActionListener(this);
         accountItem.addActionListener(this);
+        changeImage.addActionListener(this);
+
+        girlItem.addActionListener(this);
+        animalItem.addActionListener(this);
+        sportItem.addActionListener(this);
+
 
         menuBar.add(functionJMenu);
         menuBar.add(aboutJMenu);
@@ -312,6 +328,27 @@ public class GameJFrame extends JFrame implements KeyListener, MouseListener, Ac
             jDialog.setModal(true);
             //让弹框显示出来
             jDialog.setVisible(true);
+        } else if (obj==girlItem) {
+            Random r1 = new Random();
+            int num=r1.nextInt(13)+1;
+            path="image\\girl\\girl"+num+"\\";
+            step = 0; // 步数清零
+            initData(); // 打乱数据
+            initImage();
+        } else if (obj==animalItem) {
+            Random r2 = new Random();
+            int num2=r2.nextInt(8)+1;
+            path="image\\animal\\animal"+num2+"\\";
+            step = 0;
+            initData();
+            initImage();
+        } else if (obj==sportItem) {
+            Random r3 = new Random();
+            int num3=r3.nextInt(10)+1;
+            path="image\\sport\\sport"+num3+"\\";
+            step = 0;
+            initData();
+            initImage();
         }
     }
 }
