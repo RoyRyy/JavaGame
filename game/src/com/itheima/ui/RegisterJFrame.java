@@ -14,5 +14,6 @@ public class RegisterJFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(2);
         this.setVisible(true);
+        getContentPane();
     }
 }
